@@ -1,0 +1,22 @@
+ .header{
+    text-align: center;
+    color: #eeeeee;
+    background-color: #5a5a5a;
+    border: 3px;
+    padding: 10px 0px;
+}
+h2{
+    font-family: heading;
+    font-size: 75px;
+}
+
+@media screen and (max-width: 700px)
+{
+    h2{
+        font-size: 45px;
+    }
+    .header{
+        padding: 20px 0px;
+    }
+       
+} 

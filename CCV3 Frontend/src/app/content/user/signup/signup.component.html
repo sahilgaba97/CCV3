@@ -1,0 +1,112 @@
+<h2>Signup Form</h2>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+          <div class="alert alert-danger" *ngIf="errMsgDisplay && !showLoader">
+            <strong>Error!</strong> {{responseMsg}}
+          </div>
+
+          <div class="alert alert-success" *ngIf="successMsgDisplay && !showLoader">
+            <strong>Success!</strong> {{responseMsg}}
+          </div>
+    </div>
+
+    <div class="col-md-4"></div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="display:block;margin: 50px auto;" *ngIf="showLoader">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div class="row" *ngIf="!showLoader">
+<div class="col-md-4"></div>
+<form class="form-horizontal col-md-4 box" [formGroup]="signupForm">
+
+  <div class="form-group hidden">
+    <label class="control-label" for="imgUrl">Profile Picture:</label>
+    <div class="">
+      <input type="text" class="form-control" id="imgUrl" placeholder="Enter link of Display picture" formControlName="imgUrl">
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Person</span>
+    </div>
+    <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+    <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+  </div>
+
+  <div class="alert alert-danger" *ngIf="signupForm.get('firstName').invalid && signupForm.get('firstName').touched">
+      <strong>Error!</strong> Name required and should be of atleast 4 characters.
+  </div>
+
+  
+  <div class="alert alert-danger" *ngIf="signupForm.get('lastName').invalid && signupForm.get('lastName').touched">
+      <strong>Error!</strong> Name required and should be of atleast 2 characters.
+  </div>
+  
+  
+
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Gender</span>
+      </div>
+    <select formControlName="gender" class="custom-select">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Email" id="demo" name="email" formControlName="email">
+      <div class="input-group-append">
+        <span class="input-group-text">@example.com</span>
+      </div>
+    </div>
+  
+
+  </div>
+  <div class="alert alert-danger" *ngIf="signupForm.get('email').invalid && signupForm.get('email').touched">
+      <strong>Error!</strong> Invalid Email.
+  </div>
+  <div class="alert alert-danger" *ngIf="emailRegistered">
+      <strong>Error!</strong> This email is already registered.
+  </div>
+  
+
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Create password</span>
+    </div>
+    <input type="password" class="form-control" placeholder="Create password" formControlName="password">
+  </div>
+
+  <div class="alert alert-danger" *ngIf="signupForm.get('password').invalid && signupForm.get('password').touched">
+      <strong>Error!</strong> Password should be of atleast 6 characters.
+  </div>
+  
+
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Confirm password</span>
+    </div>
+    <input type="password" class="form-control" placeholder="Confirm password" formControlName="confirmPassword">
+  </div>
+
+  <div class="alert alert-danger" *ngIf="pswdError">
+      <strong>Error!</strong> passwords doesn't match.
+  </div>
+
+  <div class="form-group"> 
+    <div class="submitBtn">
+      <button type="submit" class="btn btn-success" (click)="signupSubmit()" [disabled]="!signupForm.valid">Signup</button>
+    </div>
+  </div>
+</form>
+<div class="col-md-4"></div>
+</div>

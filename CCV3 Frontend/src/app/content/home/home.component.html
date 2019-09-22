@@ -1,0 +1,30 @@
+<h2 appHeadings style="font-family: marker;">Home</h2>
+
+
+<div class="row" *ngIf="isAuthenticated">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="box">
+      <img src="{{userObject.imgUrl}}" class="dp">
+      <!-- <img src="assets/images/profile-picture.png" class="dp"> -->
+      {{firstName}} {{lastName}}<br>
+      <span *ngIf="!emailVerified">(Email not verified)</span>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h4 style="color: #029c10;font-family: marker;">
+      Welcome to coconut catalogue!
+    </h4>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<img class="img-responsive" alt="coconut home" src="assets/images/coconut-home.jpg" style="display: block; margin: auto;max-width: 100%;">
+
+
+

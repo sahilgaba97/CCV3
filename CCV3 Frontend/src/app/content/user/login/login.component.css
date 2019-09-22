@@ -1,0 +1,14 @@
+.box
+{
+    margin: 10px;
+}
+.submitBtn
+{
+    text-align: center;
+}
+.spinner
+{
+    text-align: center;
+    display:block;
+    margin: 80px auto;
+}

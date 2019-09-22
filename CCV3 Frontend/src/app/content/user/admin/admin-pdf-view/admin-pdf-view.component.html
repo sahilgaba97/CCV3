@@ -1,0 +1,18 @@
+<div class="spinner-border text-primary" style="display: block; margin: 50px auto;" *ngIf="showLoader"></div>
+<div class="row">
+<div class="col-md-2"></div>  
+<div class="col-md-8 box">  
+<pdf-viewer src='https://coconutc-docs.s3.ap-south-1.amazonaws.com/{{pdfSrc}}' 
+[render-text]="true"
+[render-text-mode]="2"
+[original-size]="false"
+[autoresize]="true"
+[original-size]="true"
+[show-all]="false"
+style="display: block;margin: 0px;"
+(after-load-complete)="callBackFn($event)"
+>
+</pdf-viewer>
+</div>
+<div class="col-md-2"></div>
+</div>

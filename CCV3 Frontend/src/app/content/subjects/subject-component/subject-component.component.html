@@ -1,0 +1,28 @@
+<h3>{{subjectName}}</h3>
+<div class="spinner-border text-primary" *ngIf="loaderShow && haveInternetConnection">
+</div>
+<div class="middle noInternet" *ngIf="!haveInternetConnection">
+  No internet
+</div>
+<div class="middle noInternet" *ngIf="totalDocs==0">
+    No Docs!
+  </div>
+<div style="padding: 10px 10%;font-size: 20px;" *ngIf="!loaderShow && totalDocs!=0">
+    <span class="badge badge-secondary">Results: {{totalDocs}}</span>
+</div>
+<div class="container" *ngIf="!loaderShow">
+  <app-notes-template class="col-sm-4" [object]="x" appNotesTemplate *ngFor="let x of docsArray"></app-notes-template>
+</div>
+<br>
+<!-- Center-aligned -->
+<ul class="pagination justify-content-center" *ngIf="!loaderShow">
+  <li class="page-item" [ngClass]="{'disabled': page==1?true:false}"><a class="page-link" href="javascript:void(0);" (click)="previousPage()">Previous</a></li>
+  <li class="page-item" [ngClass]="{'active': page==1?true:false}"><a class="page-link" href="javascript:void(0);" (click)="goToPage(1)">1</a></li>
+  <li class="page-item" [ngClass]="{'active': page==2?true:false}" *ngIf="totalPages>=2?true:false"><a class="page-link" href="javascript:void(0);" (click)="goToPage(2)">2</a></li>
+  <li class="page-item" [ngClass]="{'active': page==3?true:false}" *ngIf="totalPages>=3?true:false"><a class="page-link" href="javascript:void(0);" (click)="goToPage(3)">3</a></li>
+  <span *ngIf="totalPages>3?true:false">
+    <li class="page-item" [ngClass]="{'active': page==totalPages?true:false}"><a class="page-link" href="javascript:void(0);" (click)="goToPage(totalPages)">{{totalPages}}</a></li>
+  </span>
+  <li class="page-item" [ngClass]="{'disabled': page==totalPages?true:false || totalDocs==0 || !haveInternetConnection}"><a class="page-link" href="javascript:void(0);" (click)="nextPage()">Next</a></li>
+</ul>
+

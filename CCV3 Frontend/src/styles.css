@@ -1,0 +1,25 @@
+.row
+{
+    margin: 0px;
+}
+h1,h2,h3,h4,h5,h6
+{
+    text-align: center;
+}
+body
+{
+    background-color: #ffffff;
+}
+.subjectsLink
+{
+    text-align: center;
+}
+.subjectsLink a:link,.subjectsLink  a:hover,.subjectsLink  a:visited
+{
+    color: rgb(54, 57, 59);
+    font-family: marker;
+}
+.subjectsLink a:hover
+{
+    color: rgb(0, 119, 134);
+}

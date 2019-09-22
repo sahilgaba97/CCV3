@@ -1,0 +1,23 @@
+<div class="row" *ngIf="isAdmin">
+  <div class="col-sm-12" style="text-align: center">
+    <h2>ADMIN</h2>
+  </div>
+    <ul class="nav nav-tabs col-sm-12">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/user','admin','authDocs']"  data-toggle="" routerLinkActive="active">Auth Docs</a>
+        </li>
+        <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/user','admin','notification']"  data-toggle="" routerLinkActive="active">Notifications</a>
+        </li> -->
+    </ul>
+  <div class="col-sm-12" style="display: block; margin: auto;">  
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="!isAdmin">
+<div class="col-lg-4 alert alert-danger" style="text-align: center;display:block;margin: auto">
+    You are not an <strong>ADMIN</strong>!
+</div>
+  <img class="img-responsive" alt="not-found" src="assets/images/not-found.gif" style="display: block; margin: auto;max-width: 100%;">
+</div>
+

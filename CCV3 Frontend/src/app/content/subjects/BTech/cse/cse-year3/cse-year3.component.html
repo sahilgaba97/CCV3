@@ -1,0 +1,19 @@
+<div class="row">
+  
+  <div class="col-md-6">
+    <h3>Semester 5</h3>
+    <ul class="list-group">
+      <li class="list-group-item subjectsLink" *ngFor="let s5 of sem5subjects"><a routerLink="{{s5.rlink}}">{{s5.name}}</a></li>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Semester 6</h3>
+    <ul class="list-group">
+      <li class="list-group-item subjectsLink" *ngFor="let s6 of sem6subjects"><a routerLink="{{s6.rlink}}">{{s6.name}}</a></li>    
+    </ul>  
+  </div>
+
+</div>
+<br>
+<br>

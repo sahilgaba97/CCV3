@@ -1,0 +1,21 @@
+.navbar-brand
+{
+    font-family: heading;font-size: 30px;
+}
+li a:link
+{
+    font-family: marker;
+}
+ul.navbar-right
+{
+    background-color: #ffffff;
+    text-align: right;
+    right:5px;
+}
+@media screen and (max-width: 700px)
+{
+    .navbar-brand
+{
+    font-family: marker;font-size: 20px;
+}   
+} 

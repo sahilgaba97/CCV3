@@ -1,0 +1,176 @@
+<h3>Upload docs</h3>
+<div class="row">
+  <div class="col-md-4"></div>
+  
+  <div class="col-md-4" *ngIf="processCompleted">
+    <div class="alert alert-success">
+      <strong>Success!</strong> Doc successfully uploaded. It will take about 48 hours to authorize it.
+    </div>
+  </div>
+
+  <div class="col-md-4" *ngIf="!emailVerified">
+    <div class="alert alert-info">
+      Only users with verified emails can upload docs.
+    </div>
+  </div>
+
+  <div class="col-md-4" *ngIf="!processCompleted && isAuthenticated && emailVerified">
+    
+    
+    <!--Form Started-->
+    <form class="form-horizontal" [formGroup]="docsUploadForm">
+  
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Heading</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Heading" formControlName="heading">
+      </div>
+    
+      <div class="alert alert-danger" *ngIf="docsUploadForm.get('heading').invalid && docsUploadForm.get('heading').touched">
+          <strong>Error!</strong> Heading should be of atleast 6 characters.
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Description</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Description" formControlName="text">
+      </div>
+    
+      <div class="alert alert-danger" *ngIf="docsUploadForm.get('text').invalid && docsUploadForm.get('text').touched">
+          <strong>Error!</strong> Description should be of max 150 characters.
+      </div>
+    
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          
+          <select class="input-group-text" formControlName="course" (change)="courseChange()">
+            <option value="">Course</option>
+            <option *ngFor="let n of courseArray" value={{n.value}}>{{n.name}}</option>
+            <!-- <option value="btech">B.Tech</option>
+            <option value="mtech">M.Tech</option> -->
+          </select>
+          <select class="input-group-text" formControlName="stream" *ngIf="docsUploadForm.value.course=='btech' || docsUploadForm.value.course==''">
+                <option value="">Stream</option>                
+                  <ng-container *ngIf="docsUploadForm.value.course=='btech'">
+                    <option *ngFor="let k of btechStreamArray" value={{k.value}} >{{k.name}}</option>
+                  </ng-container>
+                  <!-- <ng-container *ngIf="docsUploadForm.value.course=='mtech'">
+                    <option *ngFor="let s of mtechStreamArray" value={{s.value}}>{{s.name}}</option>
+                  </ng-container> -->
+          </select>
+        </div>
+        
+        <select class="custom-select" formControlName="subject">
+          <ng-container *ngIf="docsUploadForm.value.stream=='ece'">
+            <option *ngFor="let l of btechEceArray" value={{l.data.endpointEnd}}>{{l.data.subjectName}}</option>
+          </ng-container>
+          <ng-container *ngIf="docsUploadForm.value.stream=='cse'">
+              <option *ngFor="let l of btechCseArray" value={{l.data.endpointEnd}}>{{l.data.subjectName}}</option>
+          </ng-container>
+          <ng-container *ngIf="docsUploadForm.value.course=='library'">
+            <option *ngFor="let l of libraryArray" value={{l.data.endpointEnd}}>{{l.data.subjectName}}</option>
+          </ng-container>
+          <ng-container *ngIf="docsUploadForm.value.course=='jee'">
+            <option *ngFor="let l of jeeArray" value={{l.data.endpointEnd}}>{{l.data.subjectName}}</option>
+          </ng-container>
+        </select>
+      </div>
+        <input type="hidden" class="form-control" placeholder="User FirstName" formControlName="userFirstName">
+        <input type="hidden" class="form-control" placeholder="User Email" formControlName="userEmail">
+        <input type="hidden" class="form-control" placeholder="fileLocation" formControlName="fileLocation">
+        <input type="hidden" class="form-control" placeholder="filename" formControlName="filename">
+        <input type="hidden" class="form-control" placeholder="originalname" formControlName="originalname">
+    </form>
+    <!--Form Done-->   
+
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input 
+        type="file" 
+        class="custom-file-input" 
+        id="customFile"
+        name="file" 
+        (change)="fileChange($event)" 
+        ng2FileSelect
+        [uploader]="uploader"
+        [disabled]="uploader.queue.length>=1?true:false || startedUploading"
+        >
+        <label class="custom-file-label" for="customFile">
+          {{this.uploader.queue.length}} files selected
+        </label>
+      </div>
+    </div>
+
+    <div *ngFor="let item of uploader.queue">
+      {{item.file.name | stringLength: 40}}
+      <br>
+      <div class="progress margin5" *ngIf="item.progress>0 && item.progress<100?true:false">
+        <div 
+        class="progress-bar progress-bar bg-success active" 
+        role="progressbar"
+        aria-valuenow="40" 
+        aria-valuemin="0" 
+        aria-valuemax="100" 
+        [ngStyle]="{'width':item.progress+'%'}"
+        *ngIf="item.progress>0?true:false"
+        >
+        {{item.progress}}%
+        </div>
+        <br>
+      </div>
+      <div class="btn-group margin5" *ngIf="item.progress==0?true:false">
+        <!-- <button type="button" class="btn btn-info" (click)="item.upload()" *ngIf="uploader.queue.length>1?false:true">Upload</button> -->
+        <button type="button" class="btn btn-dark" (click)="item.remove(); itemCancelled(item)">Cancel</button>
+      </div>
+      <div class="alert alert-danger" *ngIf="item.isError">
+          <strong>Server error!</strong> Could not upload file.
+      </div>
+      
+      
+      <div class="alert alert-danger" *ngIf='item.file.type=="application/pdf"?false:true'>
+          <strong>Error!</strong> File of <b>{{item.file.type}}</b> format is not accepted.
+          Only <b>pdf</b> format is allowed.
+      </div>
+      <p 
+      *ngIf="item.progress>0?true:false" 
+      style="text-align: center;"
+      >
+        <b>Status: </b> 
+          <span 
+          class="text-success" 
+          *ngIf="item.isUploaded && item.isSuccess" 
+          >
+          Uploaded
+          </span>
+          <span 
+          class="text-primary" 
+          *ngIf="item.isUploading" 
+          >
+          Uploading...
+          </span>
+        </p>
+          <div class="alert alert-danger" *ngIf="unableToSubmitForm">
+            <strong>Server error!</strong> File uploaded but could not submit form.
+          </div>
+      <hr>
+    </div>
+      <div *ngIf="allUploaded" class="text-primary" style="text-align: center">
+        All docs uploaded!<br>Wait for form to be submitted.
+      </div>
+      <button 
+      type="button" 
+      class="btn btn-primary" 
+      (click)="uploader.uploadAll()"
+      [disabled]="this.uploader.queue.length>0 && !fileTypeError && docsUploadForm.valid?false:true"  
+      *ngIf="!allUploaded"
+      >
+      Upload
+      </button>
+    <br><br><br>
+  </div>
+  
+  <div class="col-md-4"></div>
+</div>
+

@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">{{webName}}</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" [routerLink]="['/']">Home</a>
+      </li>
+      <!-- <li class="nav-item" routerLinkActive='active'>
+        <a class="nav-link" [routerLink]="['/cse']">CSE/IT</a>
+      </li>
+      <li class="nav-item" routerLinkActive='active'>
+        <a class="nav-link" [routerLink]="['/ece']">ECE</a>
+      </li> -->
+      <li class="nav-item dropdown" routerLinkActive='active'>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          JEE
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/JEE/physics']">Physics</a>
+          <a class="dropdown-item" [routerLink]="['/JEE/chemistry']">Chemistry</a>
+          <a class="dropdown-item" [routerLink]="['/JEE/maths']">Maths</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown" routerLinkActive='active'>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          BTech
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/BTech/cse']">CSE/IT</a>
+          <a class="dropdown-item" [routerLink]="['/BTech/ece']">ECE</a>
+        </div>
+      </li>
+      
+      
+      <li class="nav-item dropdown" routerLinkActive='active'>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Library
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/Library/all']">All</a>
+          <a class="dropdown-item" [routerLink]="['/Library/selfHelp']">Self help</a>
+        </div>
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav ml-auto" *ngIf="!isAuthenticated">
+      <li class="nav-item" routerLinkActive='active'><a class="nav-link" [routerLink]="['/signup']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="nav-item" routerLinkActive='active'><a class="nav-link" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto" *ngIf="isAuthenticated">
+      <li class="nav-item" routerLinkActive='active'><a class="nav-link" [routerLink]="['/user/upload']"><span class="glyphicon glyphicon-user"></span> Upload</a></li>
+      <!-- <li class="nav-item" routerLinkActive='active'><a class="nav-link" [routerLink]="['/login']" (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li> -->
+      <li class="nav-item dropdown" routerLinkActive='active'>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          {{userName}}
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/user/profile']">Profile</a>
+          <a class="dropdown-item" [routerLink]="['/user/admin']" *ngIf="isAdmin">Admin</a>
+          <!-- <a class="dropdown-item" [routerLink]="['/user/feedback']">feedback</a>
+          <a class="dropdown-item" [routerLink]="['/user/stared']"><fa-icon [icon]="faThumbtack" size="xs"></fa-icon>Saved</a> -->
+          <a class="dropdown-item" [routerLink]="['/login']" (click)="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div> 
+</nav>
+
+<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+  
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span> 
+        </button>
+        <a class="navbar-brand" href="#" style="color: #ffffff">{{webName}}</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/']">Home</a></li>
+          <li routerLinkActive='active' ><a [routerLink]="['/cse']">CSE/IT</a></li>
+          <li routerLinkActive='active' ><a [routerLink]="['/ece']">ECE</a></li> 
+          <li routerLinkActive='active' ><a [routerLink]="['/qpapers']">Question Papers</a></li> 
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li routerLinkActive='active'><a [routerLink]="['/signup']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li routerLinkActive='active'><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->

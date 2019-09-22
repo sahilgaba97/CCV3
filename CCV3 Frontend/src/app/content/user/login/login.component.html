@@ -1,0 +1,45 @@
+<h2>Login Form</h2>
+<div class="spinner-border text-primary spinner" *ngIf="showSpinner"></div>
+<div class="row" *ngIf="!showSpinner">
+<div class="col-md-4"></div>
+<form class="form-horizontal col-md-4 box" [formGroup]="loginForm">
+
+  <!-- <div class="form-group">
+    <label class="control-label" for="email">Email:</label>
+    <div class="">
+      <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+    </div>
+  </div>
+   -->
+
+   <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Email</span>
+    </div>
+    <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Password</span>
+    </div>
+    <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+  </div>
+
+  <div class="alert alert-danger" *ngIf="errorMsg">
+      <strong>Error!</strong> {{msg}}
+  </div>
+
+
+  <div class="form-group"> 
+    <div class="submitBtn">
+      <button type="submit" class="btn btn-success" (click)="loginSubmit()" [disabled]="!loginForm.valid">Login</button>
+    </div>
+    <br>
+    <div class="submitBtn">
+      <a [routerLink]="[ '/user','forgotPassword']">Forgot Password</a>
+    </div>
+  </div>
+</form>
+<div class="col-md-4"></div>
+</div>

@@ -1,0 +1,85 @@
+<h2>Edit profile</h2>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+          <div class="alert alert-danger" *ngIf="errorMsg && !showLoader">
+            <strong>Error!</strong> {{errorMsg}}
+          </div>
+
+          <div class="alert alert-success" *ngIf="successMsg && !showLoader">
+            <strong>Success!</strong> {{successMsg}}
+          </div>
+    </div>
+
+    <div class="col-md-4"></div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="display:block;margin: 50px auto;" *ngIf="showLoader">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div class="row" *ngIf="!showLoader">
+<div class="col-md-4"></div>
+<form class="form-horizontal col-md-4 box" [formGroup]="editProfileForm">
+
+  <div class="form-group">
+    <div class="">
+      <input type="hidden" class="form-control" id="email" placeholder="Enter first name" formControlName="email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="firstName">First name:</label>
+    <div class="">
+      <input type="text" class="form-control" id="name" placeholder="Enter first name" formControlName="firstName">
+    </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="editProfileForm.get('firstName').invalid && editProfileForm.get('firstName').touched">
+      <strong>Error!</strong> Name required and should be of atleast 4 characters.
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="lastName">Last name:</label>
+    <div class="">
+      <input type="text" class="form-control" id="lastName" placeholder="Enter last name" formControlName="lastName">
+    </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="editProfileForm.get('lastName').invalid && editProfileForm.get('lastName').touched">
+      <strong>Error!</strong> Name required and should be of atleast 2 characters.
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label" for="gender">Gender:</label><br>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" formControlName="gender" value="male" > Male
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" formControlName="gender" value="female"> Female
+      </label>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label" for="bio">Bio:</label>
+    <div class="">
+      <textarea class="form-control" rows="5" id="bio" placeholder="" formControlName="bio"></textarea>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="editProfileForm.get('bio').invalid && editProfileForm.get('bio').touched">
+    <strong>Error!</strong> Max 40 characters.
+  </div>
+
+
+
+  <div class="form-group"> 
+    <div class="submitBtn">
+      <button type="submit" class="btn btn-success" (click)="submit()" [disabled]="!editProfileForm.valid">Update</button>
+    </div>
+  </div>
+
+</form>
+<div class="col-md-4"></div>
+</div>

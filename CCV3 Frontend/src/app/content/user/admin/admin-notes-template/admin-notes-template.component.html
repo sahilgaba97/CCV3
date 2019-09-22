@@ -1,0 +1,15 @@
+<div class="box">
+    <div class="heading">{{object.heading | stringLength: 27}}</div>
+    <div class="">
+      <p>{{object.text | stringLength: 80}}</p>
+      <span style="color: #9a9a9a;font-size: 13px;text-align: right;float: left"><b>Subject: </b> {{object.subject}}</span><br>
+      <span style="color: #9a9a9a;font-size: 13px;text-align: right;float: left"><b>By: </b>{{object.userFirstName| stringLength: 15}}</span>
+      <span style="color: #aeaeae;font-size: 13px;text-align: right;float: right">{{object.dateCreated | date: 'mediumDate'}}</span>
+      <br>
+      <button class="btn btn-info" (click)="viewPressed()">View</button>
+      <button class="btn btn-success" (click)="authPressed()">Authorize</button>
+      <button class="btn btn-danger" (click)="rejectPressed()">Reject</button>
+    </div>
+</div>
+  
+  

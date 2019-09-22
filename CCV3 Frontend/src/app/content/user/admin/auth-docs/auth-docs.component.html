@@ -1,0 +1,45 @@
+<h3>UnAuth Docs</h3>
+<div class="spinner-border text-primary" *ngIf="loaderShow && haveInternetConnection">
+</div>
+<div class="middle noInternet" *ngIf="!haveInternetConnection">
+  No internet
+</div>
+<div class="middle noInternet" *ngIf="totalDocs==0">
+    No Docs!
+  </div>
+<div style="padding: 10px 10%;font-size: 20px;" *ngIf="!loaderShow && totalDocs!=0">
+    <span class="badge badge-secondary">Results: {{totalDocs}}</span>
+</div>
+<div class="container" *ngIf="!loaderShow">
+  <div class="container col-sm-4">
+    <app-admin-notes-template 
+    class="col-sm-12" 
+    [object]="x" 
+    appNotesTemplate 
+    *ngFor="let x of docsArray"
+    (viewButton)="viewPressed($event)"
+    (authButton)="authPressed($event)"
+    (rejectButton)="rejectPressed($event)"
+    >
+    </app-admin-notes-template>
+  </div>  
+  <div class="col-sm-8" style="height: 100vh;overflow-y: scroll;" *ngIf="totalDocs!=0">
+    <h3>{{heading}}</h3>  
+     {{originalname}}<br>
+      <app-admin-pdf-view class="col-sm-12" pdfSrc={{pdfDisplay}}></app-admin-pdf-view>
+  </div>
+</div>
+<br>
+<!-- Center-aligned -->
+<ul class="pagination justify-content-center" *ngIf="!loaderShow">
+  <li class="page-item" [ngClass]="{'disabled': page==1?true:false}"><a class="page-link" href="javascript:void(0);" (click)="previousPage()">Previous</a></li>
+  <li class="page-item" [ngClass]="{'active': page==1?true:false}"><a class="page-link" href="javascript:void(0);" (click)="goToPage(1)">1</a></li>
+  <li class="page-item" [ngClass]="{'active': page==2?true:false}" *ngIf="totalPages>=2?true:false"><a class="page-link" href="javascript:void(0);" (click)="goToPage(2)">2</a></li>
+  <li class="page-item" [ngClass]="{'active': page==3?true:false}" *ngIf="totalPages>=3?true:false"><a class="page-link" href="javascript:void(0);" (click)="goToPage(3)">3</a></li>
+  <span *ngIf="totalPages>3?true:false">
+    <li class="page-item" [ngClass]="{'active': page==totalPages?true:false}"><a class="page-link" href="javascript:void(0);" (click)="goToPage(totalPages)">{{totalPages}}</a></li>
+  </span>
+  <li class="page-item" [ngClass]="{'disabled': page==totalPages?true:false || totalDocs==0 || !haveInternetConnection}"><a class="page-link" href="javascript:void(0);" (click)="nextPage()">Next</a></li>
+</ul>
+
+

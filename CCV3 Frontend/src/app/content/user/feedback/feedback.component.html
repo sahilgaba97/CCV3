@@ -1,0 +1,65 @@
+<!-- <h2>Feedback Form</h2>
+<h5>{{firstName}} {{lastName}}</h5>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+          <div class="alert alert-danger" *ngIf="errMsgDisplay && !showLoader">
+            <strong>Error!</strong> {{responseMsg}}
+          </div>
+
+          <div class="alert alert-success" *ngIf="successMsgDisplay && !showLoader">
+            <strong>Success!</strong> {{responseMsg}}
+          </div>
+    </div>
+
+    <div class="col-md-4"></div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="display:block;margin: 50px auto;" *ngIf="showLoader">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div class="row" *ngIf="!showLoader">
+<div class="col-md-4"></div>
+<form class="form-horizontal col-md-4 box" [formGroup]="feedbackForm">
+  
+
+  <div class="input-group mb-3">
+    <input type="hidden" class="form-control" placeholder="First Name" formControlName="firstName">
+    <input type="hidden" class="form-control" placeholder="Last Name" formControlName="lastName">
+  </div>
+
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <input type="hidden" class="form-control" placeholder="Email" id="demo" name="email" formControlName="email">
+    </div>
+  
+
+  </div>
+  <div class="alert alert-danger" *ngIf="feedbackForm.get('email').invalid && feedbackForm.get('email').touched">
+      <strong>Error!</strong> Invalid Email.
+  </div>
+  <div class="alert alert-danger" *ngIf="emailRegistered">
+      <strong>Error!</strong> This email is already registered.
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label" for="feedbackText">Feedback:</label>
+    <div>
+      <textarea class="form-control" rows="5" id="feedbackText" placeholder="Enter your feedback here" formControlName="feedbackText"></textarea>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="feedbackForm.get('feedbackText').invalid && feedbackForm.get('feedbackText').touched">
+    <strong>Error!</strong> Min 10 & Max 500 characters.
+  </div>
+
+
+  <div class="form-group"> 
+    <div class="submitBtn">
+      <button type="submit" class="btn btn-success" (click)="feedbackSubmit()" [disabled]="!feedbackForm.valid">Submit</button>
+    </div>
+  </div>
+</form>
+<div class="col-md-4"></div>
+</div> -->

@@ -1,0 +1,20 @@
+.box
+{
+    margin: 10px;
+}
+.submitBtn
+{
+    text-align: center;
+}
+.hidden
+{
+    display: none;
+}
+.alert
+{
+    text-align: center;
+}
+.form-check-inline
+{
+    padding: 0px 20px;
+}

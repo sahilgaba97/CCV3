@@ -1,0 +1,34 @@
+<h3>User profile</h3>
+<div class="row" *ngIf="isAuthenticated">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="box">
+      <img src="{{userObject.imgUrl}}" class="dp"><br>
+      <!-- <img src="assets/images/profile-picture.png" class="dp"> -->
+      <p class="details">
+        <b>{{firstName}} {{lastName}}</b><br>
+        {{userObject.email}}<br>
+        <span style="font-size: 18px">
+        <span *ngIf="!emailVerified">(Email not verified)<br></span>
+          <b>Gender: </b>{{userObject.gender}}<br>
+          <b>Joined on: </b>{{userObject.dateCreated | date: 'medium'}}
+          <br>
+          <b *ngIf="userObject.bio">Bio: </b> {{bio}}
+        </span>
+        
+      </p>  
+      
+      <div class="btn-group">
+        <button type="button" class="btn btn-info" (click)="editProfile()">Edit profile</button>
+        <button type="button" class="btn btn-info" (click)="changePwd()">Change pwd</button>
+      </div>
+      <br>
+      <button type="button" class="btn btn-secondary" (click)="logoutBtn()">Logout</button>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<hr>
+<br>
+<!-- <h3>My uploads</h3>
+{{userObject.starred}} -->

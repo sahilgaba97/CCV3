@@ -1,0 +1,8 @@
+li a:link,li a:hover{
+    /* font-family: write; */
+    font-size: 15px;
+}
+
+.nav-link{
+    font-family: marker;
+}

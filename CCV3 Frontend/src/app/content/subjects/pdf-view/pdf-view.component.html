@@ -1,0 +1,19 @@
+<h3 style="font-family: marker">{{heading | stringLength: 45}}</h3>
+<div class="spinner-border text-primary" style="display: block; margin: 50px auto;" *ngIf="showLoader"></div>
+<div class="row">
+<div class="col-md-2"></div>  
+<div class="col-md-8 box">  
+<pdf-viewer [src]="pdfSrc" 
+[render-text]="true"
+[render-text-mode]="0"
+[external-link-target]="'blank'"
+[original-size]="false"
+[fit-to-page]="true"
+[show-all]="true"
+style="display: block;margin: 0px;"
+(after-load-complete)="callBackFn($event)"
+>
+</pdf-viewer>
+</div>
+<div class="col-md-2"></div>
+</div>

@@ -1,0 +1,18 @@
+.box
+{
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    font-family: marker;
+    text-align: center;
+    background-color: #efefef;
+}
+.dp
+{
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 90px;
+    border-radius: 50%;
+}
